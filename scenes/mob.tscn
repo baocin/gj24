@@ -1,54 +1,99 @@
-[gd_scene load_steps=10 format=3 uid="uid://cg1k6sokpufnh"]
+[gd_scene load_steps=21 format=3 uid="uid://cg1k6sokpufnh"]
 
 [ext_resource type="Script" path="res://scripts/Mob.gd" id="1_7dc41"]
-[ext_resource type="Texture2D" uid="uid://bmk3y4idu70xc" path="res://art/enemyFlyingAlt_1.png" id="2_2clil"]
-[ext_resource type="Texture2D" uid="uid://ceb6wbgtkxk8k" path="res://art/enemyFlyingAlt_2.png" id="3_6u8ru"]
-[ext_resource type="Texture2D" uid="uid://bne6r560jb68c" path="res://art/enemySwimming_1.png" id="4_jxjyy"]
-[ext_resource type="Texture2D" uid="uid://ccgtxoe652gy1" path="res://art/enemySwimming_2.png" id="5_bpgir"]
-[ext_resource type="Texture2D" uid="uid://dlsemteob3r2a" path="res://art/enemyWalking_1.png" id="6_7mska"]
-[ext_resource type="Texture2D" uid="uid://cwwj8ohk6yegw" path="res://art/enemyWalking_2.png" id="7_njumq"]
+[ext_resource type="Texture2D" uid="uid://bbrry27k4t3xx" path="res://art/candy/gumdrop/download (1).png" id="2_dnp7p"]
+[ext_resource type="Texture2D" uid="uid://ey1djy3j7y11" path="res://art/candy/gumdrop/download (2).png" id="3_3tg8q"]
+[ext_resource type="Texture2D" uid="uid://c5n37jdpt0phb" path="res://art/strawberries/download (1).png" id="4_gxth6"]
+[ext_resource type="Texture2D" uid="uid://kt03t8hg7dn5" path="res://art/candy/gumdrop/download.png" id="4_viqu1"]
+[ext_resource type="Texture2D" uid="uid://cjm2hnrxcnmx5" path="res://art/strawberries/download (2).png" id="5_pp4qe"]
+[ext_resource type="Texture2D" uid="uid://dtmp6hknibuoh" path="res://art/candy/cupcakes/download (2).png" id="5_xx1gq"]
+[ext_resource type="Texture2D" uid="uid://cbsmlk38w3k3t" path="res://art/candy/cupcakes/download (3).png" id="6_x1v56"]
+[ext_resource type="Texture2D" uid="uid://c21cfqsuakmhr" path="res://art/candy/cupcakes/download (4).png" id="7_7f3vu"]
+[ext_resource type="Texture2D" uid="uid://sol41raaj34s" path="res://art/candy/cupcakes/download (5).png" id="8_8ltgf"]
+[ext_resource type="Texture2D" uid="uid://db4eoa301xmem" path="res://art/strawberries/download.png" id="8_21vgs"]
+[ext_resource type="Texture2D" uid="uid://ca46qg345w5ix" path="res://art/candy/cupcakes/download (6).png" id="9_1aj01"]
+[ext_resource type="Texture2D" uid="uid://cq5pybyoioq6m" path="res://art/candy/cupcakes/download (7).png" id="10_18ved"]
+[ext_resource type="Texture2D" uid="uid://dfgrr5o4kkj8g" path="res://art/candy/cupcakes/download (8).png" id="11_vhugb"]
+[ext_resource type="Texture2D" uid="uid://c2jgubec7lv11" path="res://art/candy/cupcakes/download (9).png" id="12_uu73a"]
+[ext_resource type="Texture2D" uid="uid://dp87pdy331ubc" path="res://art/candy/cupcakes/download (10).png" id="13_fs5np"]
+[ext_resource type="Texture2D" uid="uid://bskhqw85l6s1c" path="res://art/candy/cupcakes/download (11).png" id="14_ys6m5"]
+[ext_resource type="Texture2D" uid="uid://bu5dcjkeudkch" path="res://art/candy/cupcakes/download.png" id="15_nkri4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8ra5l"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2clil")
+"texture": ExtResource("2_dnp7p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_6u8ru")
+"texture": ExtResource("3_3tg8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_viqu1")
 }],
 "loop": true,
-"name": &"fly",
+"name": &"candy",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_jxjyy")
+"texture": ExtResource("5_xx1gq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_bpgir")
+"texture": ExtResource("6_x1v56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7f3vu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8ltgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1aj01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_18ved")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vhugb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_uu73a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fs5np")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ys6m5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_nkri4")
 }],
 "loop": true,
-"name": &"swim",
+"name": &"cupcake",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_7mska")
+"texture": ExtResource("8_21vgs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_njumq")
+"texture": ExtResource("5_pp4qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gxth6")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"strawberry",
 "speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6kobm"]
-radius = 54.85
-height = 229.5
+radius = 67.9371
+height = 143.963
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
+z_index = 1
 collision_mask = 0
 gravity_scale = 1.66533e-16
 script = ExtResource("1_7dc41")
@@ -57,7 +102,8 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_8ra5l")
-animation = &"fly"
+animation = &"cupcake"
+autoplay = "strawberry"
 speed_scale = 0.75
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -66,3 +112,5 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("CapsuleShape2D_6kobm")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

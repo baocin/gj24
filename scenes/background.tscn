@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2eqe2aj1cl1"]
+
+[ext_resource type="Texture2D" uid="uid://cmibo44xc1a7y" path="res://art/background/background_grass.png" id="1_imo7t"]
+[ext_resource type="Texture2D" uid="uid://cfahnwq6nbcny" path="res://art/background/fake_background.png" id="2_pa4ga"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ma6hu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_imo7t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pa4ga")
+}],
+"loop": true,
+"name": &"fake",
+"speed": 5.0
+}]
+
+[node name="Background" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ma6hu")
+animation = &"fake"

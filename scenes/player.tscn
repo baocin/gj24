@@ -1,19 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7afrt5e8h620"]
+[gd_scene load_steps=10 format=3 uid="uid://b7afrt5e8h620"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_w0dfv"]
-[ext_resource type="Texture2D" uid="uid://bpqlyv0n6uatl" path="res://art/playerGrey_up1.png" id="2_1bui7"]
-[ext_resource type="Texture2D" uid="uid://dmxob8r44t5sv" path="res://art/playerGrey_walk1.png" id="2_wjfop"]
-[ext_resource type="Texture2D" uid="uid://bnmln6ckqd1qf" path="res://art/playerGrey_walk2.png" id="3_1wxlc"]
-[ext_resource type="Texture2D" uid="uid://cxlwvol6rcp08" path="res://art/playerGrey_up2.png" id="3_tq25q"]
+[ext_resource type="Texture2D" uid="uid://cjiqqbpkhi57h" path="res://art/cat/2.png" id="2_6sd4t"]
+[ext_resource type="Texture2D" uid="uid://c6egw3k5vuaq5" path="res://art/cat/1.png" id="3_6odqc"]
+[ext_resource type="Texture2D" uid="uid://bpqlyv0n6uatl" path="res://art/og/playerGrey_up1.png" id="4_2hbwx"]
+[ext_resource type="Texture2D" uid="uid://cxlwvol6rcp08" path="res://art/og/playerGrey_up2.png" id="5_vibax"]
+[ext_resource type="AudioStream" uid="uid://d2gv6kii2pqpu" path="res://music/Chomp_og.wav" id="6_ba8ll"]
+[ext_resource type="AudioStream" uid="uid://cuxduhkmprp3u" path="res://music/wow.mp3" id="7_v6kx4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hvehd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_1bui7")
+"texture": ExtResource("2_6sd4t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_tq25q")
+"texture": ExtResource("3_6odqc")
 }],
 "loop": true,
 "name": &"up",
@@ -21,10 +23,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_wjfop")
+"texture": ExtResource("4_2hbwx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_1wxlc")
+"texture": ExtResource("5_vibax")
+}],
+"loop": true,
+"name": &"up_og",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6sd4t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6odqc")
 }],
 "loop": true,
 "name": &"walk",
@@ -32,21 +45,43 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srmmn"]
-radius = 27.0
-height = 68.0
+radius = 42.66
+height = 85.32
 
 [node name="Player" type="Area2D"]
+position = Vector2(0, 32)
 script = ExtResource("1_w0dfv")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_hvehd")
-animation = &"up"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(26.62, -19.5)
 shape = SubResource("CapsuleShape2D_srmmn")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="ChompAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ba8ll")
+volume_db = -1.743
+pitch_scale = 1.48
+attenuation = 1.31951
+
+[node name="CatPulsePointLight" type="PointLight2D" parent="."]
+position = Vector2(1.678, 11.398)
+scale = Vector2(1.00835, 0.853939)
+color = Color(0.831373, 0.992157, 0, 1)
+energy = 0.51
+texture = ExtResource("3_6odqc")
+offset = Vector2(2.08165e-12, 2.08165e-12)
+texture_scale = 0.01
+
+[node name="WowAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_v6kx4")
+pitch_scale = 1.48
+attenuation = 1.31951
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

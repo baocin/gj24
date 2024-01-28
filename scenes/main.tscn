@@ -1,21 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://dioj12agw2uek"]
+[gd_scene load_steps=11 format=3 uid="uid://dioj12agw2uek"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_8wltn"]
 [ext_resource type="PackedScene" uid="uid://cg1k6sokpufnh" path="res://scenes/mob.tscn" id="2_vbl86"]
 [ext_resource type="PackedScene" uid="uid://b7afrt5e8h620" path="res://scenes/player.tscn" id="3_dd6kv"]
+[ext_resource type="PackedScene" uid="uid://dius0w71fjb4a" path="res://scenes/cloud.tscn" id="3_lteev"]
 [ext_resource type="PackedScene" uid="uid://o5028iiyxjxu" path="res://scenes/hud.tscn" id="4_a73up"]
+[ext_resource type="PackedScene" uid="uid://b2eqe2aj1cl1" path="res://scenes/background.tscn" id="5_yt46m"]
+[ext_resource type="AudioStream" uid="uid://dly1and8oo2on" path="res://music/soundtrack.wav" id="6_mfwxb"]
+[ext_resource type="PackedScene" uid="uid://dnqxicv5cpooh" path="res://scenes/village.tscn" id="7_7fcfo"]
 
 [sub_resource type="Curve2D" id="Curve2D_4s6sp"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 457, 10, 0, 0, 0, 0, 464, 706, 0, 0, 0, 0, 24, 696, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, -1, 1)
+"points": PackedVector2Array(0, 0, 0, 0, -1, 1, 0, 0, 0, 0, 658, 8, 0, 0, 0, 0, 660, 849, 0, 0, 0, 0, 5, 844, 0, 0, 0, 0, 8, 701, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, -1, 1)
 }
-point_count = 6
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_5fqb6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 44, 38, 0, 0, 0, 0, 119, 13.7931, 0, 0, 0, 0, 300, 2.62069, 0, 0, 0, 0, 446, 28.6897, 0, 0, 0, 0, 524, 10.069, 0, 0, 0, 0, 631, 6.34483, 0, 0, 0, 0, 949, 4.61118, 0, 0, 0, 0, 987, -83.0345, 0, 0, 0, 0, 44, 38)
+}
+point_count = 9
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8wltn")
 mob_scene = ExtResource("2_vbl86")
+cloud_scene = ExtResource("3_lteev")
+
+[node name="Background" parent="." instance=ExtResource("5_yt46m")]
+position = Vector2(505.33, 508)
 
 [node name="Player" parent="." instance=ExtResource("3_dd6kv")]
+z_index = 1
+position = Vector2(495, 1120)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -30,16 +46,38 @@ one_shot = true
 position = Vector2(240, 450)
 
 [node name="MobPath" type="Path2D" parent="."]
+position = Vector2(0.491679, -0.178066)
+scale = Vector2(1.49168, 1.17807)
 curve = SubResource("Curve2D_4s6sp")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 position = Vector2(-1, 1)
-rotation = 0.0196481
+rotation = 0.0106218
 
 [node name="HUD" parent="." instance=ExtResource("4_a73up")]
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_mfwxb")
+
+[node name="Village" parent="." instance=ExtResource("7_7fcfo")]
+position = Vector2(679, 306)
+
+[node name="CloudTimer" type="Timer" parent="."]
+wait_time = 0.133
+
+[node name="CloudPath" type="Path2D" parent="."]
+position = Vector2(0, 28.8952)
+scale = Vector2(1, 0.239601)
+curve = SubResource("Curve2D_5fqb6")
+
+[node name="CloudSpawnLocation" type="PathFollow2D" parent="CloudPath"]
+position = Vector2(44, 38)
+rotation = -0.312203
+
 [connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="spawn_villager" from="Player" to="Village" method="_on_player_spawn_villager"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="timeout" from="CloudTimer" to="." method="_on_cloud_timer_timeout"]
