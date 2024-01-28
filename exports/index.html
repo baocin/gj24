@@ -137,8 +137,9 @@ body {
 		</div>
 
 		<script src="index.js"></script>
+		<script src="https://steele.red/gj24/face-api.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":2001408,"index.wasm":49219187},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":2149056,"index.wasm":2866393},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"index.service.worker.js"};
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {
@@ -240,6 +241,50 @@ const engine = new Engine(GODOT_CONFIG);
 		}).then(() => {
 			setStatusMode('hidden');
 			initializing = false;
+
+
+
+
+	const videoFace = document.createElement('video');
+	videoFace.id = 'video-face';
+	// videoFace.style.display = 'none';
+	document.body.appendChild(videoFace);
+
+	// const canvasFace = document.createElement('canvas');
+	// canvasFace.id = 'canvas-face';
+	// document.body.appendChild(canvasFace);
+
+	const getLastFrameFromVideo = () => {
+		const canvas = document.createElement('canvas');
+		canvas.width = videoFace.videoWidth;
+		canvas.height = videoFace.videoHeight;
+		const context = canvas.getContext('2d');
+		context.drawImage(videoFace, 0, 0, canvas.width, canvas.height);
+		return canvas.toDataURL('image/jpeg');
+	}
+
+	const worker = new Worker('worker.js');
+	setInterval(async () => {
+		let base64ImageData = getLastFrameFromVideo();
+		// window.faceapi = faceapi;
+		worker.postMessage({
+			type: 'DETECT_FACES',
+			frame: base64ImageData,
+			// faceapi: faceapi
+		});
+	}, 1000);
+
+	worker.addEventListener('message', (event) => {
+		if (event.data.type === 'DETECTION_RESULTS') {
+			const detectionsWithExpressions = event.data.detections;
+			if (detectionsWithExpressions.length > 0) {
+				console.log(`Happy: ${detectionsWithExpressions[0].expressions.happy}`);
+			}
+		}
+	});
+
+
+
 		}, displayFailureNotice);
 	}
 }());
